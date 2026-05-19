@@ -14,7 +14,7 @@ public class LoginWindow extends JFrame {
     private DefaultTableModel model;
 
     private JTextField nomeField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
 
     public LoginWindow() {
         init();
@@ -48,7 +48,8 @@ public class LoginWindow extends JFrame {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        this.passwordField = new JTextField(15);
+        this.passwordField = new JPasswordField(15);
+        this.passwordField.setEchoChar('*');
         jPanel.add(this.passwordField, gbc);
 
         mainPanel.add(titolo, BorderLayout.NORTH);
@@ -69,6 +70,6 @@ public class LoginWindow extends JFrame {
     }
 
     public String getPassword() {
-        return this.passwordField.getText();
+        return new String(this.passwordField.getPassword());
     }
 }

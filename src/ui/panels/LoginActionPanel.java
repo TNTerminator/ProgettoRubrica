@@ -41,6 +41,8 @@ public class LoginActionPanel extends JPanel {
 
                 MainWindow window = new MainWindow(personaFileController);
                 this.parent.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this.parent, "Nome utente e/o password errati", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
 

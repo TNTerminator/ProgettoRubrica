@@ -10,7 +10,7 @@ public class NuovoUtenteDialog extends JDialog {
     private JFrame parent;
 
     private JTextField nomeField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
 
     private Utente utente;
 
@@ -25,8 +25,6 @@ public class NuovoUtenteDialog extends JDialog {
     private void init() {
         JPanel jPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
-        setPreferredSize(new Dimension(400,400));
 
         gbc.insets = new Insets(5,5,5,5);
         gbc.anchor = GridBagConstraints.WEST;
@@ -46,7 +44,8 @@ public class NuovoUtenteDialog extends JDialog {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        this.passwordField = new JTextField(15);
+        this.passwordField = new JPasswordField(15);
+        this.passwordField.setEchoChar('*');
         jPanel.add(this.passwordField, gbc);
 
         JPanel buttonPanel = new JPanel();
@@ -70,7 +69,7 @@ public class NuovoUtenteDialog extends JDialog {
 
     private void saveUser() {
         if(this.validUser()) {
-            this.utente = new Utente(this.nomeField.getText(), this.passwordField.getText());
+            this.utente = new Utente(this.nomeField.getText(), new String(this.passwordField.getPassword()));
 
             dispose();
         }
@@ -81,7 +80,7 @@ public class NuovoUtenteDialog extends JDialog {
     }
 
     private boolean validUser() {
-        return !nomeField.getText().isBlank() && !passwordField.getText().isBlank();
+        return !nomeField.getText().isBlank() && !(new String(passwordField.getPassword()).isBlank());
     }
 
     public Utente getUtente() {
