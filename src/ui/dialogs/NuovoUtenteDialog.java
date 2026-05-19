@@ -37,8 +37,8 @@ public class NuovoUtenteDialog extends JDialog {
         jPanel.add(new JLabel("Nome"), gbc);
 
         gbc.gridx = 1;
-        nomeField = new JTextField(15);
-        jPanel.add(nomeField, gbc);
+        this.nomeField = new JTextField(15);
+        jPanel.add(this.nomeField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -46,8 +46,8 @@ public class NuovoUtenteDialog extends JDialog {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        passwordField = new JTextField(15);
-        jPanel.add(passwordField, gbc);
+        this.passwordField = new JTextField(15);
+        jPanel.add(this.passwordField, gbc);
 
         JPanel buttonPanel = new JPanel();
 
@@ -65,12 +65,12 @@ public class NuovoUtenteDialog extends JDialog {
 
         pack();
 
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(this.parent);
     }
 
     private void saveUser() {
         if(this.validUser()) {
-            utente = new Utente(nomeField.getText(), passwordField.getText());
+            this.utente = new Utente(this.nomeField.getText(), this.passwordField.getText());
 
             dispose();
         }
@@ -85,7 +85,7 @@ public class NuovoUtenteDialog extends JDialog {
     }
 
     public Utente getUtente() {
-        return utente;
+        return this.utente;
     }
 
 }

@@ -47,8 +47,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Nome"), gbc);
 
         gbc.gridx = 1;
-        nomeField = new JTextField(15);
-        jPanel.add(nomeField, gbc);
+        this.nomeField = new JTextField(15);
+        jPanel.add(this.nomeField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -56,8 +56,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Cognome"), gbc);
 
         gbc.gridx = 1;
-        cognomeField = new JTextField(15);
-        jPanel.add(cognomeField, gbc);
+        this.cognomeField = new JTextField(15);
+        jPanel.add(this.cognomeField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -65,8 +65,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Indirizzo"), gbc);
 
         gbc.gridx = 1;
-        indirizzoField = new JTextField(15);
-        jPanel.add(indirizzoField, gbc);
+        this.indirizzoField = new JTextField(15);
+        jPanel.add(this.indirizzoField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -74,8 +74,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Telefono"), gbc);
 
         gbc.gridx = 1;
-        telefonoField = new JTextField(15);
-        jPanel.add(telefonoField, gbc);
+        this.telefonoField = new JTextField(15);
+        jPanel.add(this.telefonoField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -83,10 +83,10 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Età"), gbc);
 
         gbc.gridx = 1;
-        etaField = new JTextField(15);
-        jPanel.add(etaField, gbc);
+        this.etaField = new JTextField(15);
+        jPanel.add(this.etaField, gbc);
 
-        if(persona != null) {
+        if(this.persona != null) {
             initPersona();
         }
 
@@ -111,14 +111,14 @@ public class PersonaInfoDialog extends JDialog {
 
     private void savePerson() {
         if(this.validPerson()) {
-            if (persona == null) {
-                persona = new Persona(nomeField.getText(), cognomeField.getText(), indirizzoField.getText(), telefonoField.getText(), Integer.parseInt(etaField.getText()));
+            if (this.persona == null) {
+                this.persona = new Persona(this.nomeField.getText(), this.cognomeField.getText(), this.indirizzoField.getText(), this.telefonoField.getText(), Integer.parseInt(this.etaField.getText()));
             } else {
-                persona.setNome(nomeField.getText());
-                persona.setCognome(cognomeField.getText());
-                persona.setIndirizzo(indirizzoField.getText());
-                persona.setTelefono(telefonoField.getText());
-                persona.setEta(Integer.parseInt(etaField.getText()));
+                this.persona.setNome(this.nomeField.getText());
+                this.persona.setCognome(this.cognomeField.getText());
+                this.persona.setIndirizzo(this.indirizzoField.getText());
+                this.persona.setTelefono(this.telefonoField.getText());
+                this.persona.setEta(Integer.parseInt(this.etaField.getText()));
             }
 
             dispose();
@@ -130,29 +130,29 @@ public class PersonaInfoDialog extends JDialog {
     }
 
     public Persona getPersona() {
-        return persona;
+        return this.persona;
     }
 
     private void initPersona() {
-        nomeField.setText(persona.getNome());
-        cognomeField.setText(persona.getCognome());
-        indirizzoField.setText(persona.getIndirizzo());
-        telefonoField.setText(persona.getTelefono());
-        etaField.setText(Integer.toString(persona.getEta()));
+        this.nomeField.setText(this.persona.getNome());
+        this.cognomeField.setText(this.persona.getCognome());
+        this.indirizzoField.setText(this.persona.getIndirizzo());
+        this.telefonoField.setText(this.persona.getTelefono());
+        this.etaField.setText(Integer.toString(this.persona.getEta()));
     }
 
     private boolean validPerson() {
 
-        if(nomeField.getText().isBlank()
-                || cognomeField.getText().isBlank()
-                || indirizzoField.getText().isBlank()
-                || telefonoField.getText().isBlank()
-                || etaField.getText().isBlank()) {
+        if(this.nomeField.getText().isBlank()
+                || this.cognomeField.getText().isBlank()
+                || this.indirizzoField.getText().isBlank()
+                || this.telefonoField.getText().isBlank()
+                || this.etaField.getText().isBlank()) {
             return false;
         }
 
         try {
-            int eta = Integer.parseInt(etaField.getText());
+            int eta = Integer.parseInt(this.etaField.getText());
             return eta != 0;
         } catch (NumberFormatException e) {
             return false;

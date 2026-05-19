@@ -32,51 +32,51 @@ public class RubricaActionPanel extends JPanel {
         add(removeButton);
 
         addButton.addActionListener(e -> {
-            PersonaInfoDialog window = new PersonaInfoDialog(parent, null);
+            PersonaInfoDialog window = new PersonaInfoDialog(this.parent, null);
             window.setVisible(true);
             Persona persona = window.getPersona();
             if (persona != null) {
-                persone.add(persona);
+                this.persone.add(persona);
                 sync();
             }
         });
 
         editButton.addActionListener(e -> {
-            int row = table.getSelectedRow();
+            int row = this.table.getSelectedRow();
             if (row != -1) {
-                Persona persona = persone.get(row);
-                PersonaInfoDialog window = new PersonaInfoDialog(parent, persona);
+                Persona persona = this.persone.get(row);
+                PersonaInfoDialog window = new PersonaInfoDialog(this.parent, persona);
                 window.setVisible(true);
                 Persona newPersona = window.getPersona();
                 if(persona != null) {
-                    persone.set(row, newPersona);
+                    this.persone.set(row, newPersona);
                     sync();
                 }
             } else {
-                JOptionPane.showMessageDialog(parent, "Per modificare una persona è necessario selezionarla", "Errore", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this.parent, "Per modificare una persona è necessario selezionarla", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         removeButton.addActionListener(e -> {
-            int row = table.getSelectedRow();
+            int row = this.table.getSelectedRow();
             if (row != -1) {
-                int choice = JOptionPane.showConfirmDialog(parent, "Vuoi eliminare la persona: " + persone.get(row).getNome() + " " + persone.get(row).getCognome() + "?", "Elimina persona", JOptionPane.YES_NO_OPTION);
+                int choice = JOptionPane.showConfirmDialog(this.parent, "Vuoi eliminare la persona: " + this.persone.get(row).getNome() + " " + this.persone.get(row).getCognome() + "?", "Elimina persona", JOptionPane.YES_NO_OPTION);
 
                 if(choice == JOptionPane.YES_NO_OPTION) {
-                    persone.remove(row);
-                    model.removeRow(row);
+                    this.persone.remove(row);
+                    this.model.removeRow(row);
                     sync();
                 }
             } else {
-                JOptionPane.showMessageDialog(parent, "Per eliminare una persona è necessario selezionarla", "Errore", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this.parent, "Per eliminare una persona è necessario selezionarla", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
     private void sync() {
-        model.setRowCount(0);
-        for (Persona p : persone) {
-            model.addRow(new Object[]{
+        this.model.setRowCount(0);
+        for (Persona p : this.persone) {
+            this.model.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
                     p.getTelefono(),
@@ -85,6 +85,6 @@ public class RubricaActionPanel extends JPanel {
             });
         }
 
-        personaFileController.salvaPath(persone);
+        personaFileController.salvaPath(this.persone);
     }
 }

@@ -19,9 +19,9 @@ public class LoginActionPanel extends JPanel {
 
     public LoginActionPanel(LoginWindow parent) {
         this.parent = parent;
-        utenteFileController = new UtenteFileController(Path.of("utenti/"));
+        this.utenteFileController = new UtenteFileController(Path.of("utenti/"));
 
-        utenti = utenteFileController.leggiPath();
+        this.utenti = this.utenteFileController.leggiPath();
 
         init();
     }
@@ -34,24 +34,24 @@ public class LoginActionPanel extends JPanel {
         add(addButton);
 
         loginButton.addActionListener( e -> {
-            Utente utente = new Utente(parent.getNome(), parent.getPassword());
+            Utente utente = new Utente(this.parent.getNome(), this.parent.getPassword());
 
-            if(utenteFileController.trovaUtente(utente)) {
+            if(this.utenteFileController.trovaUtente(utente)) {
                 PersonaFileController personaFileController = new PersonaFileController(Path.of("informazioni/"));
 
                 MainWindow window = new MainWindow(personaFileController);
-                parent.dispose();
+                this.parent.dispose();
             }
         });
 
         addButton.addActionListener(e -> {
-            NuovoUtenteDialog window = new NuovoUtenteDialog(parent);
+            NuovoUtenteDialog window = new NuovoUtenteDialog(this.parent);
             window.setVisible(true);
 
             Utente utente = window.getUtente();
             if(utente != null) {
-                utenti.add(utente);
-                utenteFileController.salvaPath(utenti);
+                this.utenti.add(utente);
+                this.utenteFileController.salvaPath(this.utenti);
             }
         });
     }

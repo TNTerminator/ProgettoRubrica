@@ -26,7 +26,7 @@ public class PersonaFileController {
     }
 
     public void salvaPath(List<Persona> persone) {
-        try (Stream<Path> stream = Files.list(path)) {
+        try (Stream<Path> stream = Files.list(this.path)) {
             stream.forEach(p -> {
                 try {
                     Files.delete(p);
@@ -35,14 +35,14 @@ public class PersonaFileController {
                 }
             });
         } catch (Exception e) {
-            System.out.println("Errore nella pulizia della cartella: " + path);
+            System.out.println("Errore nella pulizia della cartella: " + this.path);
         }
 
         try {
             int contatorePersona = 1;
 
             for (Persona p : persone) {
-                Path personFile = path.resolve("Persona_" + Integer.toString(contatorePersona) + ".txt");
+                Path personFile = this.path.resolve("Persona_" + Integer.toString(contatorePersona) + ".txt");
                 Files.writeString(personFile, p.fileFormat());
                 contatorePersona++;
             }
@@ -53,7 +53,7 @@ public class PersonaFileController {
 
     public List<Persona> leggiPath() {
         List<Persona> persone = new ArrayList<>();
-        try (Stream<Path> stream = Files.list(path)) {
+        try (Stream<Path> stream = Files.list(this.path)) {
             stream.forEach(p -> {
                 try (Scanner scanner = new Scanner(p)) {
                     String riga = scanner.nextLine();

@@ -17,12 +17,12 @@ public class MainWindow extends JFrame {
 
     public MainWindow(PersonaFileController personaFileController) {
         this.personaFileController = personaFileController;
-        persone = personaFileController.leggiPath();
+        this.persone = personaFileController.leggiPath();
 
         setTitle("Rubrica");
         String[] columns = {"Nome", "Cognome", "Telefono"};
 
-        model = new DefaultTableModel(columns, 0) {
+        this.model = new DefaultTableModel(columns, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
     }
 
     private void init() {
-        jTable = new JTable(model);
+        this.jTable = new JTable(this.model);
         setLayout(new BorderLayout());
         add(new JScrollPane(jTable), BorderLayout.CENTER);
         add(new RubricaActionPanel(this, jTable, model, persone, personaFileController), BorderLayout.SOUTH);
@@ -47,9 +47,9 @@ public class MainWindow extends JFrame {
     }
 
     private void sync() {
-        model.setRowCount(0);
-        for (Persona p : persone) {
-            model.addRow(new Object[]{
+        this.model.setRowCount(0);
+        for (Persona p : this.persone) {
+            this.model.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
                     p.getTelefono(),

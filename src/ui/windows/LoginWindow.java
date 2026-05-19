@@ -39,8 +39,8 @@ public class LoginWindow extends JFrame {
         jPanel.add(new JLabel("Nome utente"), gbc);
 
         gbc.gridx = 1;
-        nomeField = new JTextField(15);
-        jPanel.add(nomeField, gbc);
+        this.nomeField = new JTextField(15);
+        jPanel.add(this.nomeField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -48,8 +48,8 @@ public class LoginWindow extends JFrame {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        passwordField = new JTextField(15);
-        jPanel.add(passwordField, gbc);
+        this.passwordField = new JTextField(15);
+        jPanel.add(this.passwordField, gbc);
 
         mainPanel.add(titolo, BorderLayout.NORTH);
         mainPanel.add(jPanel, BorderLayout.CENTER);
@@ -65,10 +65,10 @@ public class LoginWindow extends JFrame {
     }
 
     public String getNome() {
-        return nomeField.getText();
+        return this.nomeField.getText();
     }
 
     public String getPassword() {
-        return passwordField.getText();
+        return this.passwordField.getText();
     }
 }
