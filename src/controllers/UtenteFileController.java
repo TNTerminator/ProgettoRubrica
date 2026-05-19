@@ -42,7 +42,7 @@ public class UtenteFileController {
             int contatoreUtenti = 1;
 
             for (Utente u : utenti) {
-                Path userFile = this.percorso.resolve("Utente_" + Integer.toString(contatoreUtenti) + ".txt");
+                Path userFile = this.percorso.resolve("Utente_" + contatoreUtenti + ".txt");
                 Files.writeString(userFile, u.fileFormat());
                 contatoreUtenti++;
             }
