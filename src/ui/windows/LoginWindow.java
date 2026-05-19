@@ -10,18 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginWindow extends JFrame {
-    private List<Utente> utenti = new ArrayList<>();
-    private DefaultTableModel model;
-
-    private JTextField nomeField;
-    private JPasswordField passwordField;
+    private JTextField campoNome;
+    private JPasswordField campoPassword;
 
     public LoginWindow() {
         init();
     }
 
     private void init() {
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel pannelloPrincipale = new JPanel(new BorderLayout());
 
         JLabel titolo = new JLabel("Login Rubrica", SwingConstants.CENTER);
 
@@ -39,8 +36,8 @@ public class LoginWindow extends JFrame {
         jPanel.add(new JLabel("Nome utente"), gbc);
 
         gbc.gridx = 1;
-        this.nomeField = new JTextField(15);
-        jPanel.add(this.nomeField, gbc);
+        this.campoNome = new JTextField(15);
+        jPanel.add(this.campoNome, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -48,15 +45,15 @@ public class LoginWindow extends JFrame {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        this.passwordField = new JPasswordField(15);
-        this.passwordField.setEchoChar('*');
-        jPanel.add(this.passwordField, gbc);
+        this.campoPassword = new JPasswordField(15);
+        this.campoPassword.setEchoChar('*');
+        jPanel.add(this.campoPassword, gbc);
 
-        mainPanel.add(titolo, BorderLayout.NORTH);
-        mainPanel.add(jPanel, BorderLayout.CENTER);
-        mainPanel.add(new LoginActionPanel(this), BorderLayout.SOUTH);
+        pannelloPrincipale.add(titolo, BorderLayout.NORTH);
+        pannelloPrincipale.add(jPanel, BorderLayout.CENTER);
+        pannelloPrincipale.add(new LoginActionPanel(this), BorderLayout.SOUTH);
 
-        add(mainPanel);
+        add(pannelloPrincipale);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -66,10 +63,10 @@ public class LoginWindow extends JFrame {
     }
 
     public String getNome() {
-        return this.nomeField.getText();
+        return this.campoNome.getText();
     }
 
     public String getPassword() {
-        return new String(this.passwordField.getPassword());
+        return new String(this.campoPassword.getPassword());
     }
 }

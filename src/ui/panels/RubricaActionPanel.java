@@ -11,45 +11,45 @@ import java.util.List;
 public class RubricaActionPanel extends JPanel {
 
     private JFrame parent;
-    private JTable table;
-    private DefaultTableModel model;
+    private JTable tabella;
+    private DefaultTableModel modello;
     private List<Persona> persone;
     private PersonaFileController personaFileController;
 
-    public RubricaActionPanel(JFrame parent, JTable table, DefaultTableModel model, List<Persona> persone, PersonaFileController personaFileController) {
+    public RubricaActionPanel(JFrame parent, JTable tabella, DefaultTableModel modello, List<Persona> persone, PersonaFileController personaFileController) {
         this.parent = parent;
-        this.table = table;
-        this.model = model;
+        this.tabella = tabella;
+        this.modello = modello;
         this.persone = persone;
         this.personaFileController = personaFileController;
 
-        JButton addButton = new JButton("Aggiungi");
-        JButton editButton = new JButton("Modifica");
-        JButton removeButton = new JButton("Rimuovi");
+        JButton pulsanteAggiungi = new JButton("Aggiungi");
+        JButton pulsanteModifica = new JButton("Modifica");
+        JButton pulsanteAnnulla = new JButton("Rimuovi");
 
-        add(addButton);
-        add(editButton);
-        add(removeButton);
+        add(pulsanteAggiungi);
+        add(pulsanteModifica);
+        add(pulsanteAnnulla);
 
-        addButton.addActionListener(e -> {
-            PersonaInfoDialog window = new PersonaInfoDialog(this.parent, null);
-            window.setVisible(true);
-            Persona persona = window.getPersona();
+        pulsanteAggiungi.addActionListener(e -> {
+            PersonaInfoDialog finestra = new PersonaInfoDialog(this.parent, null);
+            finestra.setVisible(true);
+            Persona persona = finestra.getPersona();
             if (persona != null) {
                 this.persone.add(persona);
                 sync();
             }
         });
 
-        editButton.addActionListener(e -> {
-            int row = this.table.getSelectedRow();
-            if (row != -1) {
-                Persona persona = this.persone.get(row);
-                PersonaInfoDialog window = new PersonaInfoDialog(this.parent, persona);
-                window.setVisible(true);
-                Persona newPersona = window.getPersona();
+        pulsanteModifica.addActionListener(e -> {
+            int riga = this.tabella.getSelectedRow();
+            if (riga != -1) {
+                Persona persona = this.persone.get(riga);
+                PersonaInfoDialog finestra = new PersonaInfoDialog(this.parent, persona);
+                finestra.setVisible(true);
+                Persona newPersona = finestra.getPersona();
                 if(persona != null) {
-                    this.persone.set(row, newPersona);
+                    this.persone.set(riga, newPersona);
                     sync();
                 }
             } else {
@@ -57,14 +57,14 @@ public class RubricaActionPanel extends JPanel {
             }
         });
 
-        removeButton.addActionListener(e -> {
-            int row = this.table.getSelectedRow();
-            if (row != -1) {
-                int choice = JOptionPane.showConfirmDialog(this.parent, "Vuoi eliminare la persona: " + this.persone.get(row).getNome() + " " + this.persone.get(row).getCognome() + "?", "Elimina persona", JOptionPane.YES_NO_OPTION);
+        pulsanteAnnulla.addActionListener(e -> {
+            int riga = this.tabella.getSelectedRow();
+            if (riga != -1) {
+                int scelta = JOptionPane.showConfirmDialog(this.parent, "Vuoi eliminare la persona: " + this.persone.get(riga).getNome() + " " + this.persone.get(riga).getCognome() + "?", "Elimina persona", JOptionPane.YES_NO_OPTION);
 
-                if(choice == JOptionPane.YES_NO_OPTION) {
-                    this.persone.remove(row);
-                    this.model.removeRow(row);
+                if(scelta == JOptionPane.YES_NO_OPTION) {
+                    this.persone.remove(riga);
+                    this.modello.removeRow(riga);
                     sync();
                 }
             } else {
@@ -74,9 +74,9 @@ public class RubricaActionPanel extends JPanel {
     }
 
     private void sync() {
-        this.model.setRowCount(0);
+        this.modello.setRowCount(0);
         for (Persona p : this.persone) {
-            this.model.addRow(new Object[]{
+            this.modello.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
                     p.getTelefono(),

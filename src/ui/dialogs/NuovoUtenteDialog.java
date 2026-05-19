@@ -9,8 +9,8 @@ public class NuovoUtenteDialog extends JDialog {
 
     private JFrame parent;
 
-    private JTextField nomeField;
-    private JPasswordField passwordField;
+    private JTextField campoNome;
+    private JPasswordField campoPassword;
 
     private Utente utente;
 
@@ -35,8 +35,8 @@ public class NuovoUtenteDialog extends JDialog {
         jPanel.add(new JLabel("Nome"), gbc);
 
         gbc.gridx = 1;
-        this.nomeField = new JTextField(15);
-        jPanel.add(this.nomeField, gbc);
+        this.campoNome = new JTextField(15);
+        jPanel.add(this.campoNome, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -44,23 +44,23 @@ public class NuovoUtenteDialog extends JDialog {
         jPanel.add(new JLabel("Password"), gbc);
 
         gbc.gridx = 1;
-        this.passwordField = new JPasswordField(15);
-        this.passwordField.setEchoChar('*');
-        jPanel.add(this.passwordField, gbc);
+        this.campoPassword = new JPasswordField(15);
+        this.campoPassword.setEchoChar('*');
+        jPanel.add(this.campoPassword, gbc);
 
-        JPanel buttonPanel = new JPanel();
+        JPanel pannelloBottoni = new JPanel();
 
-        JButton addButton = new JButton("Aggiungi utente");
-        JButton discardButton = new JButton("Annulla");
+        JButton bottoneAggiungi = new JButton("Aggiungi utente");
+        JButton bottoneAnnulla = new JButton("Annulla");
 
-        addButton.addActionListener(e -> saveUser());
-        discardButton.addActionListener(e -> discardUser());
+        bottoneAggiungi.addActionListener(e -> saveUser());
+        bottoneAnnulla.addActionListener(e -> discardUser());
 
-        buttonPanel.add(addButton);
-        buttonPanel.add(discardButton);
+        pannelloBottoni.add(bottoneAggiungi);
+        pannelloBottoni.add(bottoneAnnulla);
 
         add(jPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(pannelloBottoni, BorderLayout.SOUTH);
 
         pack();
 
@@ -69,7 +69,7 @@ public class NuovoUtenteDialog extends JDialog {
 
     private void saveUser() {
         if(this.validUser()) {
-            this.utente = new Utente(this.nomeField.getText(), new String(this.passwordField.getPassword()));
+            this.utente = new Utente(this.campoNome.getText(), new String(this.campoPassword.getPassword()));
 
             dispose();
         }
@@ -80,7 +80,7 @@ public class NuovoUtenteDialog extends JDialog {
     }
 
     private boolean validUser() {
-        return !nomeField.getText().isBlank() && !(new String(passwordField.getPassword()).isBlank());
+        return !campoNome.getText().isBlank() && !(new String(campoPassword.getPassword()).isBlank());
     }
 
     public Utente getUtente() {

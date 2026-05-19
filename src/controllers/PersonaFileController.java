@@ -11,14 +11,14 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class PersonaFileController {
-    private Path path;
+    private Path percorso;
 
-    public PersonaFileController(Path filePath) {
-        this.path = filePath;
+    public PersonaFileController(Path percorso) {
+        this.percorso = percorso;
 
-        if(!Files.exists(this.path)) {
+        if(!Files.exists(this.percorso)) {
             try {
-                Files.createDirectories(this.path);
+                Files.createDirectories(this.percorso);
             } catch (IOException e) {
                 System.out.println("Errore creazione directory");
             }
@@ -26,7 +26,7 @@ public class PersonaFileController {
     }
 
     public void salvaPath(List<Persona> persone) {
-        try (Stream<Path> stream = Files.list(this.path)) {
+        try (Stream<Path> stream = Files.list(this.percorso)) {
             stream.forEach(p -> {
                 try {
                     Files.delete(p);
@@ -35,14 +35,14 @@ public class PersonaFileController {
                 }
             });
         } catch (Exception e) {
-            System.out.println("Errore nella pulizia della cartella: " + this.path);
+            System.out.println("Errore nella pulizia della cartella: " + this.percorso);
         }
 
         try {
             int contatorePersona = 1;
 
             for (Persona p : persone) {
-                Path personFile = this.path.resolve("Persona_" + Integer.toString(contatorePersona) + ".txt");
+                Path personFile = this.percorso.resolve("Persona_" + Integer.toString(contatorePersona) + ".txt");
                 Files.writeString(personFile, p.fileFormat());
                 contatorePersona++;
             }
@@ -53,7 +53,7 @@ public class PersonaFileController {
 
     public List<Persona> leggiPath() {
         List<Persona> persone = new ArrayList<>();
-        try (Stream<Path> stream = Files.list(this.path)) {
+        try (Stream<Path> stream = Files.list(this.percorso)) {
             stream.forEach(p -> {
                 try (Scanner scanner = new Scanner(p)) {
                     String riga = scanner.nextLine();

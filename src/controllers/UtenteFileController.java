@@ -2,7 +2,6 @@ package controllers;
 
 import model.Utente;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,15 +11,14 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class UtenteFileController {
-    private File file;
-    private Path path;
+    private Path percorso;
 
-    public UtenteFileController(Path filePath) {
-        this.path = filePath;
+    public UtenteFileController(Path percorso) {
+        this.percorso = percorso;
 
-        if(!Files.exists(this.path)) {
+        if(!Files.exists(this.percorso)) {
             try {
-                Files.createDirectories(this.path);
+                Files.createDirectories(this.percorso);
             } catch (IOException e) {
                 System.out.println("Errore creazione directory");
             }
@@ -28,7 +26,7 @@ public class UtenteFileController {
     }
 
     public void salvaPath(List<Utente> utenti) {
-        try (Stream<Path> stream = Files.list(this.path)) {
+        try (Stream<Path> stream = Files.list(this.percorso)) {
             stream.forEach(p -> {
                 try {
                     Files.delete(p);
@@ -37,14 +35,14 @@ public class UtenteFileController {
                 }
             });
         } catch (Exception e) {
-            System.out.println("Errore nella pulizia della cartella: " + this.path);
+            System.out.println("Errore nella pulizia della cartella: " + this.percorso);
         }
 
         try {
             int contatoreUtenti = 1;
 
             for (Utente u : utenti) {
-                Path userFile = this.path.resolve("Utente_" + Integer.toString(contatoreUtenti) + ".txt");
+                Path userFile = this.percorso.resolve("Utente_" + Integer.toString(contatoreUtenti) + ".txt");
                 Files.writeString(userFile, u.fileFormat());
                 contatoreUtenti++;
             }
@@ -55,7 +53,7 @@ public class UtenteFileController {
 
     public List<Utente> leggiPath() {
         List<Utente> utenti = new ArrayList<>();
-        try (Stream<Path> stream = Files.list(this.path)) {
+        try (Stream<Path> stream = Files.list(this.percorso)) {
             stream.forEach(p -> {
                 try (Scanner scanner = new Scanner(p)) {
                     String riga = scanner.nextLine();

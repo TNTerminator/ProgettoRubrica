@@ -27,30 +27,30 @@ public class LoginActionPanel extends JPanel {
     }
 
     private void init() {
-        JButton loginButton = new JButton("Login");
-        JButton addButton = new JButton("Aggiungi utente");
+        JButton pulsanteLogin = new JButton("Login");
+        JButton pulsanteAggiungi = new JButton("Aggiungi utente");
 
-        add(loginButton);
-        add(addButton);
+        add(pulsanteLogin);
+        add(pulsanteAggiungi);
 
-        loginButton.addActionListener( e -> {
+        pulsanteLogin.addActionListener( e -> {
             Utente utente = new Utente(this.parent.getNome(), this.parent.getPassword());
 
             if(this.utenteFileController.trovaUtente(utente)) {
                 PersonaFileController personaFileController = new PersonaFileController(Path.of("informazioni/"));
 
-                MainWindow window = new MainWindow(personaFileController);
+                MainWindow finestra = new MainWindow(personaFileController);
                 this.parent.dispose();
             } else {
                 JOptionPane.showMessageDialog(this.parent, "Nome utente e/o password errati", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        addButton.addActionListener(e -> {
-            NuovoUtenteDialog window = new NuovoUtenteDialog(this.parent);
-            window.setVisible(true);
+        pulsanteAggiungi.addActionListener(e -> {
+            NuovoUtenteDialog finestra = new NuovoUtenteDialog(this.parent);
+            finestra.setVisible(true);
 
-            Utente utente = window.getUtente();
+            Utente utente = finestra.getUtente();
             if(utente != null) {
                 this.utenti.add(utente);
                 this.utenteFileController.salvaPath(this.utenti);

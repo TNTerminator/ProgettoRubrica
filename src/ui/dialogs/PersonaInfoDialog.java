@@ -8,11 +8,11 @@ public class PersonaInfoDialog extends JDialog {
 
     private Persona persona;
 
-    private JTextField nomeField;
-    private JTextField cognomeField;
-    private JTextField indirizzoField;
-    private JTextField telefonoField;
-    private JTextField etaField;
+    private JTextField campoNome;
+    private JTextField campoCognome;
+    private JTextField campoIndirizzo;
+    private JTextField campoTelefono;
+    private JTextField campoEta;
 
     JFrame parent;
 
@@ -47,8 +47,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Nome"), gbc);
 
         gbc.gridx = 1;
-        this.nomeField = new JTextField(15);
-        jPanel.add(this.nomeField, gbc);
+        this.campoNome = new JTextField(15);
+        jPanel.add(this.campoNome, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -56,8 +56,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Cognome"), gbc);
 
         gbc.gridx = 1;
-        this.cognomeField = new JTextField(15);
-        jPanel.add(this.cognomeField, gbc);
+        this.campoCognome = new JTextField(15);
+        jPanel.add(this.campoCognome, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -65,8 +65,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Indirizzo"), gbc);
 
         gbc.gridx = 1;
-        this.indirizzoField = new JTextField(15);
-        jPanel.add(this.indirizzoField, gbc);
+        this.campoIndirizzo = new JTextField(15);
+        jPanel.add(this.campoIndirizzo, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -74,8 +74,8 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Telefono"), gbc);
 
         gbc.gridx = 1;
-        this.telefonoField = new JTextField(15);
-        jPanel.add(this.telefonoField, gbc);
+        this.campoTelefono = new JTextField(15);
+        jPanel.add(this.campoTelefono, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -83,26 +83,26 @@ public class PersonaInfoDialog extends JDialog {
         jPanel.add(new JLabel("Età"), gbc);
 
         gbc.gridx = 1;
-        this.etaField = new JTextField(15);
-        jPanel.add(this.etaField, gbc);
+        this.campoEta = new JTextField(15);
+        jPanel.add(this.campoEta, gbc);
 
         if(this.persona != null) {
             initPersona();
         }
 
-        JPanel buttonPanel = new JPanel();
+        JPanel pannelloBottoni = new JPanel();
 
-        JButton saveButton = new JButton("Salva");
-        JButton discardButton = new JButton("Annulla");
+        JButton pulsanteSalva = new JButton("Salva");
+        JButton pulsanteAnnulla = new JButton("Annulla");
 
-        saveButton.addActionListener(e -> savePerson());
-        discardButton.addActionListener(e -> discardPerson());
+        pulsanteSalva.addActionListener(e -> savePerson());
+        pulsanteAnnulla.addActionListener(e -> discardPerson());
 
-        buttonPanel.add(saveButton);
-        buttonPanel.add(discardButton);
+        pannelloBottoni.add(pulsanteSalva);
+        pannelloBottoni.add(pulsanteAnnulla);
 
         add(jPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(pannelloBottoni, BorderLayout.SOUTH);
 
         pack();
 
@@ -112,13 +112,13 @@ public class PersonaInfoDialog extends JDialog {
     private void savePerson() {
         if(this.validPerson()) {
             if (this.persona == null) {
-                this.persona = new Persona(this.nomeField.getText(), this.cognomeField.getText(), this.indirizzoField.getText(), this.telefonoField.getText(), Integer.parseInt(this.etaField.getText()));
+                this.persona = new Persona(this.campoNome.getText(), this.campoCognome.getText(), this.campoIndirizzo.getText(), this.campoTelefono.getText(), Integer.parseInt(this.campoEta.getText()));
             } else {
-                this.persona.setNome(this.nomeField.getText());
-                this.persona.setCognome(this.cognomeField.getText());
-                this.persona.setIndirizzo(this.indirizzoField.getText());
-                this.persona.setTelefono(this.telefonoField.getText());
-                this.persona.setEta(Integer.parseInt(this.etaField.getText()));
+                this.persona.setNome(this.campoNome.getText());
+                this.persona.setCognome(this.campoCognome.getText());
+                this.persona.setIndirizzo(this.campoIndirizzo.getText());
+                this.persona.setTelefono(this.campoTelefono.getText());
+                this.persona.setEta(Integer.parseInt(this.campoEta.getText()));
             }
 
             dispose();
@@ -134,25 +134,25 @@ public class PersonaInfoDialog extends JDialog {
     }
 
     private void initPersona() {
-        this.nomeField.setText(this.persona.getNome());
-        this.cognomeField.setText(this.persona.getCognome());
-        this.indirizzoField.setText(this.persona.getIndirizzo());
-        this.telefonoField.setText(this.persona.getTelefono());
-        this.etaField.setText(Integer.toString(this.persona.getEta()));
+        this.campoNome.setText(this.persona.getNome());
+        this.campoCognome.setText(this.persona.getCognome());
+        this.campoIndirizzo.setText(this.persona.getIndirizzo());
+        this.campoTelefono.setText(this.persona.getTelefono());
+        this.campoEta.setText(Integer.toString(this.persona.getEta()));
     }
 
     private boolean validPerson() {
 
-        if(this.nomeField.getText().isBlank()
-                || this.cognomeField.getText().isBlank()
-                || this.indirizzoField.getText().isBlank()
-                || this.telefonoField.getText().isBlank()
-                || this.etaField.getText().isBlank()) {
+        if(this.campoNome.getText().isBlank()
+                || this.campoCognome.getText().isBlank()
+                || this.campoIndirizzo.getText().isBlank()
+                || this.campoTelefono.getText().isBlank()
+                || this.campoEta.getText().isBlank()) {
             return false;
         }
 
         try {
-            int eta = Integer.parseInt(this.etaField.getText());
+            int eta = Integer.parseInt(this.campoEta.getText());
             return eta != 0;
         } catch (NumberFormatException e) {
             return false;

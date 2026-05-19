@@ -11,7 +11,7 @@ import java.util.List;
 public class MainWindow extends JFrame {
 
     private List<Persona> persone;
-    private DefaultTableModel model;
+    private DefaultTableModel modello;
     private JTable jTable;
     private PersonaFileController personaFileController;
 
@@ -20,9 +20,9 @@ public class MainWindow extends JFrame {
         this.persone = personaFileController.leggiPath();
 
         setTitle("Rubrica");
-        String[] columns = {"Nome", "Cognome", "Telefono"};
+        String[] colonne = {"Nome", "Cognome", "Telefono"};
 
-        this.model = new DefaultTableModel(columns, 0) {
+        this.modello = new DefaultTableModel(colonne, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -34,10 +34,10 @@ public class MainWindow extends JFrame {
     }
 
     private void init() {
-        this.jTable = new JTable(this.model);
+        this.jTable = new JTable(this.modello);
         setLayout(new BorderLayout());
         add(new JScrollPane(jTable), BorderLayout.CENTER);
-        add(new RubricaActionPanel(this, jTable, model, persone, personaFileController), BorderLayout.SOUTH);
+        add(new RubricaActionPanel(this, jTable, modello, persone, personaFileController), BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -47,9 +47,9 @@ public class MainWindow extends JFrame {
     }
 
     private void sync() {
-        this.model.setRowCount(0);
+        this.modello.setRowCount(0);
         for (Persona p : this.persone) {
-            this.model.addRow(new Object[]{
+            this.modello.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
                     p.getTelefono(),
