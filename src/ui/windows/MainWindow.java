@@ -20,7 +20,7 @@ public class MainWindow extends JFrame {
         persone = personaFileController.leggiPath();
 
         setTitle("Rubrica");
-        String[] columns = {"Nome", "Cognome", "Indirizzo"};
+        String[] columns = {"Nome", "Cognome", "Telefono"};
 
         model = new DefaultTableModel(columns, 0) {
             public boolean isCellEditable(int row, int column) {
@@ -52,8 +52,8 @@ public class MainWindow extends JFrame {
             model.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
-                    p.getIndirizzo(),
                     p.getTelefono(),
+                    p.getIndirizzo(),
                     p.getEta()
             });
         }

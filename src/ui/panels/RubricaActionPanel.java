@@ -79,8 +79,8 @@ public class RubricaActionPanel extends JPanel {
             model.addRow(new Object[]{
                     p.getNome(),
                     p.getCognome(),
-                    p.getIndirizzo(),
                     p.getTelefono(),
+                    p.getIndirizzo(),
                     p.getEta()
             });
         }
